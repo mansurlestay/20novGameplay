@@ -9,6 +9,11 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public Texture2D texture;
+    private int xTiles = 10;
+    private int yTiles = 10;
+    private int screenWidth = 800;
+    private int screenHeight = 600;
+    private ArrayManager arrM;
 
     public Game1()
     {
@@ -16,8 +21,8 @@ public class Game1 : Game
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
-        _graphics.PreferredBackBufferHeight = 600;
-        _graphics.PreferredBackBufferWidth = 800;
+        _graphics.PreferredBackBufferHeight = screenHeight;
+        _graphics.PreferredBackBufferWidth = screenWidth;
         _graphics.ApplyChanges();
     }
 
@@ -37,6 +42,8 @@ public class Game1 : Game
         texture = new Texture2D(GraphicsDevice,1,1);
         texture.SetData(new[] {Color.White});
 
+        arrM = new ArrayManager(texture, xTiles, yTiles, screenWidth, screenHeight);
+
     }
 
     protected override void Update(GameTime gameTime)
@@ -55,6 +62,7 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
+        arrM.DrawArray(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);

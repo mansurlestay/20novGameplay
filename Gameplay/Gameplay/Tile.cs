@@ -10,6 +10,7 @@ public class Tile
     private Texture2D _tileTex;
     private Rectangle _tileRec;
     private Color _tileColor;
+    private int outline = 1;
     public enum TileType
     {
         Path,
@@ -66,6 +67,10 @@ public class Tile
     public void DrawTile(SpriteBatch sBatch)
     {
         sBatch.Draw(_tileTex, _tileRec, _tileColor);
+        sBatch.Draw(_tileTex, new Rectangle(_tileRec.X, _tileRec.Y, outline, _tileRec.Height), Color.Black);
+        sBatch.Draw(_tileTex, new Rectangle(_tileRec.X, _tileRec.Y, _tileRec.Width, outline), Color.Black);
+        sBatch.Draw(_tileTex, new Rectangle(_tileRec.X + _tileRec.Width - outline, _tileRec.Y, outline, _tileRec.Height), Color.Black);
+        sBatch.Draw(_tileTex, new Rectangle(_tileRec.X, _tileRec.Y + _tileRec.Height - outline, _tileRec.Width, outline), Color.Black);
     }
 
 
