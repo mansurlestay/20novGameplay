@@ -24,9 +24,44 @@ public class Tile
         _tileTex = tileTex;
         _tileRec = new Rectangle(x,y, width, height);
         Type = tileType;
+        TileConfiguration();
+    }
+    public void TileConfiguration()
+    {
+        if(Type == TileType.Path)
+        {
+            _tileColor = Color.PaleGreen;
+        }
+        else if(Type == TileType.Tower)
+        {
+            _tileColor = Color.Yellow;
+        }
+        else if(Type == TileType.PreTower)
+        {
+            _tileColor = Color.LightGray;
+        }
+        else
+        {
+            _tileColor = Color.White;
+        }
+    }
+    public bool ClickedOn(MouseState mouseState)
+    {
+        if(_tileRec.Contains(mouseState.Position))
+        {
+           return true; 
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    
+    public void SetType(TileType newType)
+    {
+        Type = newType;
+        TileConfiguration();
+    }
 
     public void DrawTile(SpriteBatch sBatch)
     {
