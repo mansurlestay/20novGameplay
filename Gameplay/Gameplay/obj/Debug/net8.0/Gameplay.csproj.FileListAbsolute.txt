@@ -31,3 +31,4 @@
 /Users/mansurlestay/20novGameplay/Gameplay/Gameplay/obj/Debug/net8.0/Gameplay.pdb
 /Users/mansurlestay/20novGameplay/Gameplay/Gameplay/obj/Debug/net8.0/Gameplay.genruntimeconfig.cache
 /Users/mansurlestay/20novGameplay/Gameplay/Gameplay/obj/Debug/net8.0/ref/Gameplay.dll
+/Users/mansurlestay/20novGameplay/Gameplay/Gameplay/obj/Debug/net8.0/Gameplay.sourcelink.json
