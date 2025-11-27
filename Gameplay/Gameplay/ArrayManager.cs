@@ -76,5 +76,16 @@ public class ArrayManager
         {
             tile.DrawTile(sBatch);
         }
+        foreach(Tile tile in TileArray)
+        {
+            tile.DrawTileOutline(sBatch);
+        }
+        foreach(Tile tile in TileArray)
+        {
+            if(tile.Type == Tile.TileType.Tower)
+            {
+                tile.DrawRange(sBatch);
+            }
+        }
     }
 }

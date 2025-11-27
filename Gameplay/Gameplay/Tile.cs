@@ -76,30 +76,30 @@ public class Tile
         _tileRec.Width + (2 * strikeRange * _tileRec.Width), _tileRec.Height + (2 * strikeRange * _tileRec.Height));
     }
 
-    public void DrawTile(SpriteBatch sBatch)
+    public void DrawRange(SpriteBatch sBatch)
     {
+        //top
+        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, strikeRectangle.Width, rangeThickness), Color.Red);
+        //left
+        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
+        //right
+        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X + strikeRectangle.Width - rangeThickness, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
+        //bottom
+        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y + (strikeRectangle.Height - rangeThickness), strikeRectangle.Width, rangeThickness), Color.Red);
+    }
 
-        sBatch.Draw(_tileTex, _tileRec, _tileColor);
-        #region TileOutline
+    public void DrawTileOutline(SpriteBatch sBatch)
+    {
         sBatch.Draw(_tileTex, new Rectangle(_tileRec.X, _tileRec.Y, outline, _tileRec.Height), Color.Black);
         sBatch.Draw(_tileTex, new Rectangle(_tileRec.X, _tileRec.Y, _tileRec.Width, outline), Color.Black);
         sBatch.Draw(_tileTex, new Rectangle(_tileRec.X + _tileRec.Width - outline, _tileRec.Y, outline, _tileRec.Height), Color.Black);
         sBatch.Draw(_tileTex, new Rectangle(_tileRec.X, _tileRec.Y + _tileRec.Height - outline, _tileRec.Width, outline), Color.Black);
-        #endregion
+    }
 
-        #region TowerRange
-        if(Type == TileType.Tower)
-        {
-            //top
-            sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, strikeRectangle.Width, rangeThickness), Color.Red);
-            //left
-            sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
-            //right
-            sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X + strikeRectangle.Width - rangeThickness, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
-            //bottom
-            sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y + (strikeRectangle.Height - rangeThickness), strikeRectangle.Width, rangeThickness), Color.Red);
-        }
-        #endregion
+    public void DrawTile(SpriteBatch sBatch)
+    {
+
+        sBatch.Draw(_tileTex, _tileRec, _tileColor);
     }
 
 
