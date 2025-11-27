@@ -9,11 +9,12 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public Texture2D texture;
-    private int xTiles = 10;
-    private int yTiles = 10;
-    private int screenWidth = 800;
-    private int screenHeight = 600;
+    private int xTiles = 11;
+    private int yTiles = 11;
+    private int screenWidth = 880;
+    private int screenHeight = 660;
     private ArrayManager arrM;
+    private MouseState mouseState;
 
     public Game1()
     {
@@ -52,6 +53,13 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
+
+        mouseState = Mouse.GetState();
+        if(mouseState.LeftButton == ButtonState.Pressed)
+        {
+            arrM.TileClicked(mouseState);
+        }
+        
 
         base.Update(gameTime);
     }
