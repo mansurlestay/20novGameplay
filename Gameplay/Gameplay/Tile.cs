@@ -14,8 +14,9 @@ public class Tile
     private Color _tileColor;
     private int outline = 1;
     private int strikeRange = 1;
-    private int rangeThickness = 10;
-    private Rectangle strikeRectangle;
+    private int rangeThickness = 1;
+    // private Rectangle strikeRectangle;
+    private Rectangle[] pointRecArr = new Rectangle[360];
     public enum TileType
     {
         Path,
@@ -41,7 +42,8 @@ public class Tile
         else if(Type == TileType.Tower)
         {
             _tileColor = Color.Yellow;
-            StrikeRangeRec();
+            // StrikeRangeRec();
+            VisualStrikeRadius();
         }
         else if(Type == TileType.PreTower)
         {
@@ -70,22 +72,42 @@ public class Tile
         TileConfiguration();
     }
 
-    public void StrikeRangeRec()
+    public void VisualStrikeRadius()
     {
-        strikeRectangle = new Rectangle(_tileRec.X - (strikeRange * _tileRec.Width), _tileRec.Y - (strikeRange * _tileRec.Height), 
-        _tileRec.Width + (2 * strikeRange * _tileRec.Width), _tileRec.Height + (2 * strikeRange * _tileRec.Height));
+        int radius = strikeRange * _tileRec.Width;
+        Vector2 circleCenter = new Vector2(_tileRec.X + (_tileRec.Width / 2), _tileRec.Y + (_tileRec.Height / 2));
+        for(int i=0; i < pointRecArr.GetLength(0); i++)
+        {
+            double angle = ((2 * Math.PI) / pointRecArr.GetLength(0)) * i;
+            Vector2 pointPos = new Vector2((int)(radius * Math.Sin(angle) + circleCenter.X), (int)(radius * Math.Cos(angle)) + circleCenter.Y);
+            pointRecArr[i] = new Rectangle((int)pointPos.X, (int)pointPos.Y, rangeThickness, rangeThickness);
+        }
     }
 
-    public void DrawRange(SpriteBatch sBatch)
+    // public void StrikeRangeRec()
+    // {
+    //     strikeRectangle = new Rectangle(_tileRec.X - (strikeRange * _tileRec.Width), _tileRec.Y - (strikeRange * _tileRec.Height), 
+    //     _tileRec.Width + (2 * strikeRange * _tileRec.Width), _tileRec.Height + (2 * strikeRange * _tileRec.Height));
+    // }
+
+    // public void DrawRange(SpriteBatch sBatch)
+    // {
+    //     //top
+    //     sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, strikeRectangle.Width, rangeThickness), Color.Red);
+    //     //left
+    //     sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
+    //     //right
+    //     sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X + strikeRectangle.Width - rangeThickness, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
+    //     //bottom
+    //     sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y + (strikeRectangle.Height - rangeThickness), strikeRectangle.Width, rangeThickness), Color.Red);
+    // }
+
+    public void DrawRadius(SpriteBatch sBatch)
     {
-        //top
-        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, strikeRectangle.Width, rangeThickness), Color.Red);
-        //left
-        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
-        //right
-        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X + strikeRectangle.Width - rangeThickness, strikeRectangle.Y, rangeThickness, strikeRectangle.Height), Color.Red);
-        //bottom
-        sBatch.Draw(_tileTex, new Rectangle(strikeRectangle.X, strikeRectangle.Y + (strikeRectangle.Height - rangeThickness), strikeRectangle.Width, rangeThickness), Color.Red);
+        foreach(Rectangle rec in pointRecArr)
+        {
+            sBatch.Draw(_tileTex, rec, Color.Crimson);
+        }
     }
 
     public void DrawTileOutline(SpriteBatch sBatch)

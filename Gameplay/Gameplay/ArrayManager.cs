@@ -84,7 +84,9 @@ public class ArrayManager
         {
             if(tile.Type == Tile.TileType.Tower)
             {
-                tile.DrawRange(sBatch);
+                // tile.DrawRange(sBatch);
+                tile.DrawRadius(sBatch);
+
             }
         }
     }

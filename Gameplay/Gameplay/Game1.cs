@@ -9,10 +9,12 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public Texture2D texture;
+    public Texture2D circle;
+    private Vector2[] arrPoints = new Vector2[360];
     private int xTiles = 11;
     private int yTiles = 11;
     private int screenWidth = 880;
-    private int screenHeight = 660;
+    private int screenHeight = 880;
     private ArrayManager arrM;
     private MouseState mouseState;
 
@@ -36,9 +38,11 @@ public class Game1 : Game
 
     protected override void LoadContent()
     {
+        Vector2 circleCentre = new Vector2(2,4);
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
+
 
         texture = new Texture2D(GraphicsDevice,1,1);
         texture.SetData(new[] {Color.White});
